@@ -1,0 +1,349 @@
+/**
+ * Rol: Vista — Hoja de estilos principal de la aplicación Lectum
+ * Patrones: ninguno (presentación pura)
+ *
+ * Paleta de colores y tipografía:
+ *   - Fondo principal:  #0f172a (azul noche)
+ *   - Superficie:       #1e293b
+ *   - Acento primario:  #6366f1 (índigo)
+ *   - Acento secundario:#22d3ee (cian)
+ *   - Texto claro:      #f1f5f9
+ *   - Texto suave:      #94a3b8
+ *   - Error:            #f87171
+ */
+
+/* ══════════════════════════════════════════════
+   RESET Y VARIABLES GLOBALES
+══════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-fondo:         #0f172a;
+  --color-superficie:    #1e293b;
+  --color-superficie-2:  #273549;
+  --color-borde:         #334155;
+  --color-primario:      #6366f1;
+  --color-primario-hover:#818cf8;
+  --color-secundario:    #22d3ee;
+  --color-texto:         #f1f5f9;
+  --color-texto-suave:   #94a3b8;
+  --color-error:         #f87171;
+  --color-exito:         #34d399;
+
+  --radio-borde:   0.75rem;
+  --sombra-tarjeta: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --transicion:    0.25s ease;
+
+  --fuente-base:   'Segoe UI', system-ui, -apple-system, sans-serif;
+  --fuente-mono:   'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+}
+
+/* ══════════════════════════════════════════════
+   BASE
+══════════════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuente-base);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════
+   ENCABEZADO
+══════════════════════════════════════════════ */
+.encabezado {
+  background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+  border-bottom: 1px solid var(--color-borde);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.encabezado__contenido {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.encabezado__titulo {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-texto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.encabezado__icono {
+  font-size: 0.85em;
+}
+
+.encabezado__subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+  margin-top: 0.35rem;
+}
+
+/* ══════════════════════════════════════════════
+   CONTENEDOR PRINCIPAL
+══════════════════════════════════════════════ */
+.contenedor {
+  flex: 1;
+  max-width: 760px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ══════════════════════════════════════════════
+   TARJETAS (secciones visuales)
+══════════════════════════════════════════════ */
+.tarjeta {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-tarjeta);
+  transition: border-color var(--transicion);
+}
+
+.tarjeta:focus-within {
+  border-color: var(--color-primario);
+}
+
+.tarjeta--modo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tarjeta--salida {
+  min-height: 140px;
+}
+
+/* ══════════════════════════════════════════════
+   ETIQUETAS
+══════════════════════════════════════════════ */
+.etiqueta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.5rem;
+}
+
+.etiqueta__icono {
+  font-size: 1rem;
+}
+
+/* ══════════════════════════════════════════════
+   TEXTAREA DE ENTRADA
+══════════════════════════════════════════════ */
+.entrada-texto {
+  width: 100%;
+  background-color: var(--color-superficie-2);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-family: var(--fuente-base);
+  font-size: 1rem;
+  line-height: 1.65;
+  resize: vertical;
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+  outline: none;
+}
+
+.entrada-texto::placeholder {
+  color: var(--color-texto-suave);
+  opacity: 0.6;
+}
+
+.entrada-texto:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* ══════════════════════════════════════════════
+   SELECTOR DE MODO
+══════════════════════════════════════════════ */
+.selector-modo {
+  width: 100%;
+  background-color: var(--color-superficie-2);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--fuente-base);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.selector-modo:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.selector-modo option {
+  background-color: var(--color-superficie);
+}
+
+.modo-descripcion {
+  font-size: 0.82rem;
+  color: var(--color-texto-suave);
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-superficie-2);
+  border-left: 3px solid var(--color-secundario);
+  border-radius: 0 0.35rem 0.35rem 0;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════
+   BOTÓN PROCESAR
+══════════════════════════════════════════════ */
+.seccion-accion {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-procesar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-primario) 0%, #4f46e5 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.875rem 2.5rem;
+  font-family: var(--fuente-base);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transition: background var(--transicion),
+              box-shadow var(--transicion),
+              transform var(--transicion);
+  outline: none;
+}
+
+.btn-procesar:hover {
+  background: linear-gradient(135deg, var(--color-primario-hover) 0%, var(--color-primario) 100%);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
+  transform: translateY(-2px);
+}
+
+.btn-procesar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+}
+
+.btn-procesar:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.45);
+}
+
+.btn-procesar__icono {
+  font-size: 1.1em;
+}
+
+/* ══════════════════════════════════════════════
+   ÁREA DE SALIDA
+══════════════════════════════════════════════ */
+.salida-texto {
+  font-family: var(--fuente-mono);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-texto);
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 80px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  transition: color var(--transicion);
+}
+
+.salida-texto__placeholder {
+  color: var(--color-texto-suave);
+  opacity: 0.5;
+  font-style: italic;
+  font-family: var(--fuente-base);
+}
+
+/* Estado de error */
+.salida-texto.salida-error {
+  color: var(--color-error);
+  font-family: var(--fuente-base);
+  font-size: 0.95rem;
+}
+
+/* ══════════════════════════════════════════════
+   PIE DE PÁGINA
+══════════════════════════════════════════════ */
+.pie {
+  background-color: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+  text-align: center;
+  padding: 1.25rem 1rem;
+  margin-top: auto;
+}
+
+.pie__texto {
+  font-size: 0.8rem;
+  color: var(--color-texto-suave);
+}
+
+.pie__patrones {
+  color: var(--color-primario);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVO
+══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .encabezado {
+    padding: 1.5rem 1rem;
+  }
+
+  .contenedor {
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    gap: 1.25rem;
+  }
+
+  .tarjeta {
+    padding: 1.25rem;
+  }
+
+  .btn-procesar {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+  }
+}
