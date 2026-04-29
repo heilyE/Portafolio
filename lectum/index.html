@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lectum — Procesador de Texto Inteligente</title>
+  <meta name="description" content="Lectum: aplicación web de lectura con modos normal, espaciado y mayúsculas. Arquitectura MVC + Repository + DTO + Singleton + Factory + Strategy." />
+  <link rel="stylesheet" href="assets/css/estilos.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       ENCABEZADO
+  ═════════════════════════════════════════════ -->
+  <header class="encabezado">
+    <div class="encabezado__contenido">
+      <h1 class="encabezado__titulo">
+        <span class="encabezado__icono" aria-hidden="true">📖</span>
+        Lectum
+      </h1>
+      <p class="encabezado__subtitulo">Procesador de texto con modos de lectura</p>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+  ═════════════════════════════════════════════ -->
+  <main class="contenedor" role="main">
+
+    <!-- Entrada de texto -->
+    <section class="tarjeta" aria-labelledby="etiqueta-entrada">
+      <label class="etiqueta" id="etiqueta-entrada" for="entradaTexto">
+        <span class="etiqueta__icono" aria-hidden="true">✏️</span>
+        Texto a procesar
+      </label>
+      <textarea
+        id="entradaTexto"
+        class="entrada-texto"
+        placeholder="Escribe o pega aquí el texto que deseas procesar…"
+        rows="6"
+        aria-label="Área de entrada de texto"
+        spellcheck="true"
+      ></textarea>
+    </section>
+
+    <!-- Selector de modo de lectura -->
+    <section class="tarjeta tarjeta--modo" aria-labelledby="etiqueta-modo">
+      <label class="etiqueta" id="etiqueta-modo" for="selectorModo">
+        <span class="etiqueta__icono" aria-hidden="true">🔤</span>
+        Modo de lectura
+      </label>
+      <select id="selectorModo" class="selector-modo" aria-label="Selecciona el modo de lectura">
+        <option value="normal">Normal — texto sin modificar</option>
+        <option value="espaciado">Espaciado — letras separadas</option>
+        <option value="mayusculas">Mayúsculas — todo en caja alta</option>
+      </select>
+
+      <!-- Descripción del modo seleccionado -->
+      <div class="modo-descripcion" id="modoDescripcion" aria-live="polite">
+        Muestra el texto tal como se ingresó, eliminando espacios en blanco al inicio y al final.
+      </div>
+    </section>
+
+    <!-- Botón de acción -->
+    <section class="seccion-accion">
+      <button id="btnProcesar" class="btn-procesar" type="button" aria-label="Procesar texto">
+        <span class="btn-procesar__icono" aria-hidden="true">⚡</span>
+        Procesar
+      </button>
+    </section>
+
+    <!-- Área de salida -->
+    <section class="tarjeta tarjeta--salida" aria-labelledby="etiqueta-salida">
+      <h2 class="etiqueta" id="etiqueta-salida">
+        <span class="etiqueta__icono" aria-hidden="true">📄</span>
+        Resultado
+      </h2>
+      <div
+        id="salidaTexto"
+        class="salida-texto"
+        role="region"
+        aria-live="polite"
+        aria-label="Área de resultado del procesamiento"
+      >
+        <span class="salida-texto__placeholder">El resultado aparecerá aquí…</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       PIE DE PÁGINA
+  ═════════════════════════════════════════════ -->
+  <footer class="pie">
+    <p class="pie__texto">
+      Lectum &copy; 2026 &mdash;
+      <span class="pie__patrones">MVC · Repository · DTO · Singleton · Factory · Strategy</span>
+    </p>
+  </footer>
+
+  <!-- Módulo principal: type="module" habilita ES Modules -->
+  <script type="module" src="src/main.js"></script>
+
+  <!-- Script auxiliar (sin módulo) para actualizar la descripción del modo en la UI -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var selector     = document.getElementById('selectorModo');
+      var descripcion  = document.getElementById('modoDescripcion');
+      var descripciones = {
+        normal:      'Muestra el texto tal como se ingresó, eliminando espacios en blanco al inicio y al final.',
+        espaciado:   'Separa cada letra con un espacio tenue para facilitar la lectura lenta.',
+        mayusculas:  'Convierte todo el texto a mayúsculas para una lectura destacada.',
+      };
+
+      function actualizarDescripcion() {
+        descripcion.textContent = descripciones[selector.value] || '';
+      }
+
+      selector.addEventListener('change', actualizarDescripcion);
+    });
+  </script>
+
+</body>
+</html>
